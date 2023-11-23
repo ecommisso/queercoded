@@ -1,10 +1,11 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
+import os
+import json
 
+app = Flask(__name__, static_url_path='/static')
+upload_folder = 'images'
+app.config['UPLOAD_FOLDER'] = upload_folder
 
-app = Flask(__name__)
-
-
-# get image links in there --- put a default one in there for now and can change later T-T
 
 history_data = {
     "Marsha P. Johnson": {
@@ -87,45 +88,79 @@ history_data = {
 
 @app.route('/')
 def index():
-    # return 'Index Page'
     return render_template('index.html')
 
 @app.route('/history')
 def history():
     return render_template('history.html', data=history_data)
 
-# Route for the user_story page
-@app.route('/user_story')
-def user_story():
-    return render_template('user_story.html')
+dir_path = 'stories/'
+if not os.path.exists(dir_path):
+    print("making the ../stories dir")
+    os.makedirs(dir_path)
 
-# Route for the resources page
+@app.route('/user_story', methods=['GET', 'POST'])
+def user_story():
+    if request.method == 'POST':
+        user_name = request.form.get('user_name')
+        user_input = request.form.get('user_input')
+
+        # use anon if name is not provided
+        user_data = {
+            'name': user_name if user_name else 'Anonymous',
+            'story': user_input,
+        }
+
+       # read existing json
+        json_file_path = os.path.join(dir_path, "users.json")
+        user_data_list = []
+
+        if os.path.exists(json_file_path) and os.stat(json_file_path).st_size > 0:
+            with open(json_file_path, "r") as json_file:
+                print("1")
+                user_data_list = json.load(json_file)
+                print("2")
+
+        # add to front so it shows up first
+        user_data_list.insert(0, user_data)
+
+        with open(json_file_path, "w") as json_file:
+            print("3")
+            json.dump(user_data_list, json_file)
+            print("4")
+
+        # save the drawn image as a PNG file
+        # drawing_data = request.form.get('drawing_canvas')
+        # if drawing_data:
+        #     image_data = drawing_data.split(",")[1]  # Remove the "data:image/png;base64," prefix
+        #     image = Image.open(BytesIO(base64.b64decode(image_data)))
+
+        #     # Save the image file with a unique name, for example, using the current timestamp
+        #     image_path = os.path.join(app.config['UPLOAD_FOLDER'], f'{int(time.time())}_drawing.png')
+        #     image.save(image_path)
+
+        # Redirect to the same page to avoid form resubmission on page refresh
+        return redirect(url_for('user_story'))
+    
+    json_file_path = os.path.join(dir_path, "users.json")
+    user_stories = []
+
+    if os.path.exists(json_file_path) and os.stat(json_file_path).st_size > 0:
+        with open(json_file_path, "r") as json_file:
+            for line in json_file:
+                entry = json.loads(line)
+                for item in entry: 
+                    name = item['name']
+                    story = item['story']
+                    user_stories.append(f"{name}: {story}")
+
+
+    return render_template('user_story.html', user_stories=user_stories)
+
+
 @app.route('/resources')
 def resources():
     return render_template('resources.html')
-
-
-"""
-Features:
-
-history page
-
-text y char fields
-
-need arrs to store them and access -- lol not DB
-
-min feature on tbis page -- 1 char y 1 text
-
-should i do app routes with /char_id to map everything to that one char
-
-
-do i just render the templates instead of coding it in the backend
-
-
-
-in NO way can this be comprehensive
-
-"""
 
 
 # run using: flask --app app run

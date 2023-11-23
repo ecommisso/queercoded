@@ -5,22 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>History Page</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}" type="text/css">
 </head>
 <body>
-    <h1>History Page</h1>
-    <!-- Add content here -->
+    <!-- include the navigation bar -->
+    {% include 'navbar.html' %}
 
-    <!-- Buttons to navigate to other pages -->
-    <a href="{{ url_for('index') }}"><button>Home</button></a>
-    <a href="{{ url_for('user_story') }}"><button>User Story</button></a>
-    <a href="{{ url_for('resources') }}"><button>Resources</button></a>
+    <h1>History Page</h1>
 
     <!-- Display the history for each person -->
     {% for person, hist in data.items() %}
         <h2>{{ person }}</h2>
         
         <!-- Display image -->
-        <img src="{{ url_for('static', filename=hist['image_path']) }}" alt="{{ person }}">
+        <img src="{{ url_for('static', filename=hist['image_path']) }}" alt="{{ person }}" class="small-image">
 
         <!-- Display description -->
         <p>{{ hist['text'] }}</p>

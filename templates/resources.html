@@ -5,14 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resources Page</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}" type="text/css">
 </head>
 <body>
-    <h1>Resources Page</h1>
-    <!-- Add content here -->
+    <!-- include the navigation bar -->
+    {% include 'navbar.html' %}
 
-    <!-- Buttons to navigate to other pages -->
-    <a href="{{ url_for('index') }}"><button>Home</button></a>
-    <a href="{{ url_for('history') }}"><button>History</button></a>
-    <a href="{{ url_for('user_story') }}"><button>User Story</button></a>
+    <h1>Resources Page</h1>
+
+    <h3 class="center-text">Please consider supporting these organizations:</h3>
+
+    <!-- List of resources -->
+    <div class="list-container">
+        <ul>
+            <li><a href="https://www.thetrevorproject.org/" target="_blank">The Trevor Project</a></li>
+            <li><a href="https://truecolorsunited.org/" target="_blank">True Colors United</a></li>
+            <li><a href="https://translifeline.org/" target="_blank">Trans Lifeline</a></li>
+            <li><a href="https://transequality.org/" target="_blank">National Center for Transgender Equality</a></li>
+            <li><a href="https://glaad.org/transgender/resources/" target="_blank">GLAAD's List of Trans Resources</a></li>
+            <li><a href="https://glaad.org/resourcelist/" target="_blank">GLAAD's List of LGBTQ+ Resources</a></li>
+        </ul>
+    </div>
 </body>
 </html>
