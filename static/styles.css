@@ -1,9 +1,77 @@
 body {
+    font-family: 'Arial', sans-serif;
     margin: 0;
-    font-family: Arial, sans-serif;
     padding: 0;
-    background-color: #121212;
-    color: #fff; 
+    background-color: #000;
+    color: #fff;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#about-section, #history-section, #user-story-section, #resources-section {
+    background-color: #222; /* Darker background color for sections */
+    color: #fff;
+    padding: 40px;
+    margin: 40px 0;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+h1, h2 {
+    color: #f0a0c0;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive; /* cursive for H! */
+    font-size: 2.5em; /* normal size */
+    margin-bottom: 20px;
+}
+
+h2 {
+    border-bottom: 2px solid #f0a0c0;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+
+p {
+    line-height: 1.6;
+    color: #ddd; /* Light gray text color */
+}
+
+#about-section::before,
+#history-section::before,
+#user-story-section::before,
+#resources-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    z-index: -1;
+}
+
+#about-section {
+    background: linear-gradient(rgba(240, 160, 192, 0.6), rgba(240, 160, 192, 0.3)), url('path/to/about-background.jpg') center/cover no-repeat;
+}
+
+#history-section {
+    background: linear-gradient(rgba(240, 160, 192, 0.6), rgba(240, 160, 192, 0.3)), url('path/to/history-background.jpg') center/cover no-repeat;
+}
+
+#user-story-section {
+    background: linear-gradient(rgba(240, 160, 192, 0.6), rgba(240, 160, 192, 0.3)), url('path/to/user-story-background.jpg') center/cover no-repeat;
+}
+
+#resources-section {
+    background: linear-gradient(rgba(240, 160, 192, 0.6), rgba(240, 160, 192, 0.3)), url('path/to/resources-background.jpg') center/cover no-repeat;
 }
 
 
