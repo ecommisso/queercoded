@@ -1,9 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for
 import os
 import json
+from PIL import Image
+from io import BytesIO
+import base64
+import time
+
 
 app = Flask(__name__, static_url_path='/static')
-upload_folder = 'images'
+upload_folder = 'static/drawings'
 app.config['UPLOAD_FOLDER'] = upload_folder
 
 
@@ -104,11 +109,15 @@ def user_story():
     if request.method == 'POST':
         user_name = request.form.get('user_name')
         user_input = request.form.get('user_input')
+        drawing_image_data = request.form.get('drawing_image')
+
+        print("DRAWING: ", drawing_image_data)
 
         # use anon if name is not provided
         user_data = {
             'name': user_name if user_name else 'Anonymous',
             'story': user_input,
+            'image_path': save_drawing_image(drawing_image_data),
         }
 
        # read existing json
@@ -117,27 +126,17 @@ def user_story():
 
         if os.path.exists(json_file_path) and os.stat(json_file_path).st_size > 0:
             with open(json_file_path, "r") as json_file:
-                print("1")
                 user_data_list = json.load(json_file)
-                print("2")
 
         # add to front so it shows up first
         user_data_list.insert(0, user_data)
 
         with open(json_file_path, "w") as json_file:
-            print("3")
             json.dump(user_data_list, json_file)
-            print("4")
 
-        # save the drawn image as a PNG file
-        # drawing_data = request.form.get('drawing_canvas')
-        # if drawing_data:
-        #     image_data = drawing_data.split(",")[1]  # Remove the "data:image/png;base64," prefix
-        #     image = Image.open(BytesIO(base64.b64decode(image_data)))
-
-        #     # Save the image file with a unique name, for example, using the current timestamp
-        #     image_path = os.path.join(app.config['UPLOAD_FOLDER'], f'{int(time.time())}_drawing.png')
-        #     image.save(image_path)
+        # # Handle drawing image data
+        # if drawing_image_data:
+        #     save_drawing_image(drawing_image_data)
 
         # Redirect to the same page to avoid form resubmission on page refresh
         return redirect(url_for('user_story'))
@@ -152,11 +151,32 @@ def user_story():
                 for item in entry: 
                     name = item['name']
                     story = item['story']
-                    user_stories.append(f"{name}: {story}")
+                    image_path = item['image_path']
+                    user_stories.append({'name': name, 'story': story, 'image_path': image_path})
 
 
     return render_template('user_story.html', user_stories=user_stories)
 
+def save_drawing_image(drawing_image_data):
+    # Extract the base64-encoded image data
+    _, encoded_data = drawing_image_data.split(",", 1)
+    image_data = base64.b64decode(encoded_data)
+
+    image = Image.open(BytesIO(image_data))
+
+    # Create static/drawings if DNE
+    upload_folder = app.config['UPLOAD_FOLDER']
+    os.makedirs(upload_folder, exist_ok=True)
+
+    # Save the image with unique timestamp
+    filename = f"{int(time.time())}.png"
+    image_path = os.path.join(upload_folder, filename)
+
+    print("PATH", image_path)
+    print("filename", filename)
+    image.save(image_path)
+    
+    return os.path.join("drawings", filename)
 
 @app.route('/resources')
 def resources():

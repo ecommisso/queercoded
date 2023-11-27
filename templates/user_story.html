@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Story Page</title>
     <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.3/pako.min.js"></script>
+
 </head>
 <body>
     <!-- include the navigation bar -->
@@ -30,6 +32,13 @@
         <label for="drawingCanvas">Draw yourself, something that represents you, or anything you would like to share alongside your story (optional):</label>
         <canvas id="drawingCanvas" width="500" height="300"></canvas>
 
+        <!-- Color picker for pen color -->
+        <label for="pen_color">Select Pen Color:</label>
+        <input type="color" id="pen_color" name="pen_color" value="#f0a0c0">
+
+        <!-- Hidden input to store the drawing image data URL -->
+        <input type="hidden" id="drawing_image" name="drawing_image" value="">
+
         <!-- Submit button for all 3 fields -->
         <br>
         <input type="submit" value="Submit">
@@ -45,7 +54,12 @@
         <h2>User Stories:</h2>
         <ul>
             {% for story in user_stories %}
-                <li>{{ story }}</li>
+                <li>
+                    <p>{{ story['name'] }}: {{ story['story'] }}</p>
+                    {% if story['image_path'] %}
+                        <img src="{{ url_for('static', filename=story['image_path']) }}" alt="Drawing">
+                    {% endif %}
+                </li>
             {% endfor %}
         </ul>
     {% endif %}
@@ -55,6 +69,7 @@
         const ctx = canvas.getContext("2d");
         let isDrawing = false;
         let drawingData = [];
+        let penColor = "#f0a0c0"; // default color
     
         function startDrawing(e) {
             isDrawing = true;
@@ -66,7 +81,7 @@
     
             ctx.lineWidth = 5;
             ctx.lineCap = "round";
-            ctx.strokeStyle = "#f0a0c0"; // color matches theme
+            ctx.strokeStyle = penColor; // use selected color
     
             ctx.lineTo(e.pageX - canvas.offsetLeft, e.pageY - canvas.offsetTop);
             ctx.stroke();
@@ -100,6 +115,19 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawingData = [];
         }
+    
+        // Update pen color when color picker value changes
+        document.getElementById("pen_color").addEventListener("input", function(event) {
+            penColor = event.target.value;
+        });
+
+        // Handle form submission
+        document.querySelector("form").addEventListener("submit", function(event) {
+            // Convert canvas content to data URL and set it as the value of the hidden input
+            document.getElementById("drawing_image").value = canvas.toDataURL();
+
+            console.log("DRAWING: ", document.getElementById("drawing_image").value);
+        });
     
         document.addEventListener("DOMContentLoaded", function () {
             canvas.addEventListener("mousedown", startDrawing);
