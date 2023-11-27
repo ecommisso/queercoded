@@ -12,7 +12,7 @@ body {
 }
 
 #about-section, #history-section, #user-story-section, #resources-section {
-    background-color: #222; /* Darker background color for sections */
+    background-color: #222; 
     color: #fff;
     padding: 40px;
     margin: 40px 0;
@@ -27,8 +27,8 @@ h1, h2 {
 }
 
 h1 {
-    font-family: 'Dancing Script', cursive; /* cursive for H! */
-    font-size: 2.5em; /* normal size */
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5em; 
     margin-bottom: 20px;
 }
 
@@ -41,7 +41,7 @@ h2 {
 
 p {
     line-height: 1.6;
-    color: #ddd; /* Light gray text color */
+    color: #ddd; 
 }
 
 #about-section::before,
@@ -77,7 +77,7 @@ p {
 
 img.small-image {
     width: 500px !important;
-    height: auto !important; /* maintain aspect ratio */
+    height: auto !important; 
 }
 
 nav {
@@ -86,7 +86,7 @@ nav {
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 2; /* Set a higher z-index to ensure it's above other elements */
+    z-index: 2; /* set a higher z-index to ensure it's above other elements */
 }
 
 nav a {
@@ -171,23 +171,19 @@ input[type="submit"] {
 
 
 * {box-sizing:border-box}
-/* Splide Slide */
-
-
 
 .splide__slide {
     width: 100%;
     display: flex;
-    flex-direction: column; /* Display caption below the image */
-    align-items: center; /* Center content horizontally within the slide */
+    flex-direction: column;
+    align-items: center;
   }
   
   .splide__slide img {
-    max-width: 100%; /* Ensure the image doesn't exceed the width of its container */
-    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* ensure the image doesn't exceed the width of its container */
+    height: auto;
   }
   
-  /* Thumbnails */
   .thumbnails {
     display: flex;
     margin: 1rem auto 0;
