@@ -8,7 +8,7 @@ body {
 
 
 img.small-image {
-    width: 100px !important;
+    width: 500px !important;
     height: auto !important; /* maintain aspect ratio */
 }
 
@@ -18,6 +18,7 @@ nav {
     position: fixed;
     width: 100%;
     top: 0;
+    z-index: 2; /* Set a higher z-index to ensure it's above other elements */
 }
 
 nav a {
@@ -99,3 +100,43 @@ input[type="submit"] {
 #drawingCanvas {
     border: 2px solid #f0a0c0;
 }
+
+
+* {box-sizing:border-box}
+/* Splide Slide */
+
+
+
+.splide__slide {
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Display caption below the image */
+    align-items: center; /* Center content horizontally within the slide */
+  }
+  
+  .splide__slide img {
+    max-width: 100%; /* Ensure the image doesn't exceed the width of its container */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+  /* Thumbnails */
+  .thumbnails {
+    display: flex;
+    margin: 1rem auto 0;
+    padding: 0;
+    justify-content: center;
+  }
+  
+  .thumbnail {
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    list-style: none;
+    margin: 0 0.2rem;
+    cursor: pointer;
+  }
+  
+  .thumbnail img {
+    width: 100%;
+    height: auto;
+  }
