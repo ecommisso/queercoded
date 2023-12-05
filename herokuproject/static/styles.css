@@ -1,0 +1,206 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: #fff;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#about-section, #history-section, #user-story-section, #resources-section {
+    background-color: #222; 
+    color: #fff;
+    padding: 40px;
+    margin: 40px 0;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+h1, h2 {
+    color: #f0a0c0;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5em; 
+    margin-bottom: 20px;
+}
+
+h2 {
+    border-bottom: 2px solid #f0a0c0;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+
+p {
+    line-height: 1.6;
+    color: #ddd; 
+}
+
+#about-section::before,
+#history-section::before,
+#user-story-section::before,
+#resources-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    z-index: -1;
+}
+
+#about-section {
+    background: linear-gradient(rgba(240, 160, 192, 0.6), rgba(240, 160, 192, 0.3)), url('path/to/about-background.jpg') center/cover no-repeat;
+}
+
+#history-section {
+    background: linear-gradient(rgba(240, 160, 192, 0.6), rgba(240, 160, 192, 0.3)), url('path/to/history-background.jpg') center/cover no-repeat;
+}
+
+#user-story-section {
+    background: linear-gradient(rgba(240, 160, 192, 0.6), rgba(240, 160, 192, 0.3)), url('path/to/user-story-background.jpg') center/cover no-repeat;
+}
+
+#resources-section {
+    background: linear-gradient(rgba(240, 160, 192, 0.6), rgba(240, 160, 192, 0.3)), url('path/to/resources-background.jpg') center/cover no-repeat;
+}
+
+
+img.small-image {
+    width: 500px !important;
+    height: auto !important; 
+}
+
+nav {
+    background-color: #f0a0c0;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 2; /* set a higher z-index to ensure it's above other elements */
+}
+
+nav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    
+}
+
+nav a:hover {
+    background-color: #FF69B4;
+    color: black;
+}
+
+h1 {
+    margin-top: 50px;
+    text-align: center;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+label {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #f0a0c0;
+}
+
+textarea {
+    width: 80%;
+    padding: 10px;
+    border: 2px solid #f0a0c0;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    background-color: #000;
+    color: #fff;
+}
+
+textarea, input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    border: 2px solid #f0a0c0;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    background-color: #000;
+    color: #fff;
+}
+
+input[type="submit"] {
+    width: 80%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f0a0c0;
+    color: #000;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+.center-text {
+    text-align: center;
+}
+
+.list-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#drawingCanvas {
+    border: 2px solid #f0a0c0;
+}
+
+
+* {box-sizing:border-box}
+
+.splide__slide {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .splide__slide img {
+    max-width: 100%; /* ensure the image doesn't exceed the width of its container */
+    height: auto;
+  }
+  
+  .thumbnails {
+    display: flex;
+    margin: 1rem auto 0;
+    padding: 0;
+    justify-content: center;
+  }
+  
+  .thumbnail {
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    list-style: none;
+    margin: 0 0.2rem;
+    cursor: pointer;
+  }
+  
+  .thumbnail img {
+    width: 100%;
+    height: auto;
+  }

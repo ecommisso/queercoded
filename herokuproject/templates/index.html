@@ -1,0 +1,48 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <!-- include the navigation bar -->
+    {% include 'navbar.html' %}
+
+    <h1>Queercoded</h1>
+
+    <div id="about-section">
+        <h2>About QueerCoded</h2>
+        <p>
+            Welcome to QueerCoded, a platform dedicated to fostering understanding and appreciation of queer history, and particularly the history of lesbians, queer women, and nonbinary people. In the face of current challenges, both through violence and policy, particularly targeting queer and trans individuals, the need to educate ourselves about the trailblazers and pivotal events in queer history has never been more crucial. QueerCoded stands as a response to the erasure and lack of education surrounding queer history, offering a centralized resource that brings together stories of resilience, strength, and progress. In a world where books on race, sexuality, and history face censorship, QueerCoded strives to be a haven, preserving and sharing the rich tapestry of queer history. This web app not only serves as a gateway to the past but also as a bridge to the present, empowering users to contribute their own stories and experiences. By designing personalized characters and sharing testimonies, each user becomes an integral part of the living history of queerness. QueerCoded is a celebration of diversity, an exploration of the past, and a collective effort to ensure that the history we make today is never forgotten. Join us on this journey of education, empowerment, and solidarity.
+        </p>
+    </div>
+
+    <div id="history-section">
+        <h2>History</h2>
+        <p>
+            Explore the rich history of the queer community through QueerCoded's History tab. Dive into curated content that highlights key figures, events, and milestones that have shaped the queer community. From the Stonewall riots to influential queer artists, this section aims to provide an engaging and informative journey through time. Learn, reflect, and celebrate the progress and struggles that have defined the queer experience.
+        </p>
+        <p>
+            At QueerCoded, you may notice a deliberate and artistic choice in our design – the pixelation of images. This unique stylistic approach serves as a visual representation of the digitization of queer history. Each person featured has been "coded queerly" in pixels, symbolizing the digital landscape through which we explore and share stories. The intentional pixelation invites you to engage with the content on a deeper level, emphasizing the idea that every pixel represents a fragment of our collective history, which together form a complete and vibrant narrative. This visual metaphor encourages reflection on the complexity and beauty inherent in "queer coding", inviting you to explore the intricate tapestry of the LGBTQ+ experience in the digital age.
+        </p>
+    </div>
+
+    <div id="user-story-section">
+        <h2>User Stories</h2>
+        <p>
+            The User Stories tab invites you to be a part of the living history of queerness. Share your unique experiences, perspectives, and personal journey by contributing your own story. Use the drawing canvas to create personalized characters or symbols that represent your identity. Join others in adding to the collective narrative, fostering a sense of community and solidarity. Your story matters, and QueerCoded is the space to amplify diverse voices.
+        </p>
+    </div>
+
+    <div id="resources-section">
+        <h2>Resources</h2>
+        <p>
+            The Resources tab provides a list, although incomprehensive, of some organizations and charities focused on LGBTQ+ rights, health, safety, and livelihoods. Please consider supporting these organizations.
+        </p>
+    </div>
+
+</body>
+</html>

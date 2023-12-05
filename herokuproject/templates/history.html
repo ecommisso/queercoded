@@ -1,0 +1,81 @@
+<!-- templates/history.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History Page</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.0.9/dist/css/splide.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+</head>
+<body>
+    <!-- include the navigation bar -->
+    {% include 'navbar.html' %}
+
+    <h1>History Page</h1>
+
+    <!-- Splide carousel with thumbnail gallery-->
+    <!-- Source: https://splidejs.com/tutorials/gallery/ -->
+    <section id="image-carousel" class="splide" aria-label="Gallery">
+        <div class="splide__track">
+            <ul class="splide__list">
+                <!-- You can modify this part to iterate through images in hist if needed -->
+                {% for person, hist in data.items() %}
+                    <li class="splide__slide">
+                        <h2>{{ person }}</h2>
+                        <img src="{{ url_for('static', filename=hist['image_path']) }}" alt="{{ person }}">
+                        <div class="caption">{{ hist['text'] }}</div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+
+    <!-- Thumbnails -->
+    <ul id="thumbnails" class="thumbnails">
+        {% for person, hist in data.items() %}
+        <li class="thumbnail">
+            <img src="{{ url_for('static', filename=hist['image_path']) }}" alt="{{ person }}">
+        </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Add Splide JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var splide = new Splide('#image-carousel', {
+                pagination: false,
+            });
+
+            var thumbnails = document.getElementsByClassName('thumbnail');
+            var current;
+
+            for (var i = 0; i < thumbnails.length; i++) {
+                initThumbnail(thumbnails[i], i);
+            }
+
+            function initThumbnail(thumbnail, index) {
+                thumbnail.addEventListener('click', function () {
+                    splide.go(index);
+                });
+            }
+
+            splide.on('mounted move', function () {
+                var thumbnail = thumbnails[splide.index];
+
+                if (thumbnail) {
+                    if (current) {
+                        current.classList.remove('is-active');
+                    }
+
+                    thumbnail.classList.add('is-active');
+                    current = thumbnail;
+                }
+            });
+
+            splide.mount();
+        });
+    </script>
+</body>
+</html>
